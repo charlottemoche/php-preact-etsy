@@ -1,0 +1,12 @@
+{
+  "1234": {
+    "orderId": "1234",
+    "issue": "Item not delivered",
+    "details": "Customer reports non-delivery 7 days post expected date."
+  },
+  "5678": {
+    "orderId": "5678",
+    "issue": "Refund request denied",
+    "details": "Escalated refund due to prior denial, needs manual review."
+  }
+}
