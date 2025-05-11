@@ -3,10 +3,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && cp -R ../dist/assets ../public/",
+    "watch": "chokidar 'src/**/*' 'index.html' -c 'npm run build'",
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.9.0",
     "preact": "^10.25.3",
     "preact-iso": "^2.9.1"
   },
@@ -14,6 +16,7 @@
     "@preact/preset-vite": "^2.9.3",
     "@tailwindcss/postcss": "^4.1.6",
     "autoprefixer": "^10.4.13",
+    "chokidar-cli": "^3.0.0",
     "eslint": "^8.57.1",
     "eslint-config-preact": "^1.5.0",
     "postcss": "^8.4.21",
