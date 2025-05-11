@@ -3,7 +3,8 @@ import { LocationProvider, Router, Route } from 'preact-iso';
 
 import { Header } from './components/Header.jsx';
 import { Home } from './pages/Home/index.jsx';
-import { NotFound } from './pages/_404.jsx';
+import { TicketDashboard } from './pages/TicketDashboard/index.jsx';
+import { Help } from './pages/Help/index.jsx'
 import './style.css';
 
 export function App() {
@@ -13,7 +14,9 @@ export function App() {
 			<main>
 				<Router>
 					<Route path="/" component={Home} />
-					<Route default component={NotFound} />
+					<Route path="/tickets" component={TicketDashboard} />
+					<Route path="/tickets/:id" component={TicketDashboard} />
+					<Route path="/help" component={Help} />
 				</Router>
 			</main>
 		</LocationProvider>

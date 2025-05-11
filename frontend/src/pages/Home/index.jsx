@@ -1,40 +1,36 @@
-import etsyLogo from '../../assets/etsy.svg';
-import './style.css';
+import { TicketDashboard } from "../TicketDashboard";
+import { useEffect, useState } from 'preact/hooks';
+import axios from 'axios';
 
 export function Home() {
-	return (
-		<div class="home">
-			<a href="https://preactjs.com" target="_blank">
-				<img src={etsyLogo} alt="Preact logo" height="50" width="50" />
-			</a>
-			<h1 class="text-4xl font-bold text-blue-700">Tailwind + Preact + PHP!</h1>
-			<div class="debug-block">If you see this, Tailwind is working manually</div>
-			<section>
-				<Resource
-					title="Learn Preact"
-					description="If you're new to Preact, try the interactive tutorial to learn important concepts"
-					href="https://preactjs.com/tutorial"
-				/>
-				<Resource
-					title="Differences to React"
-					description="If you're coming from React, you may want to check out our docs to see where Preact differs"
-					href="https://preactjs.com/guide/v10/differences-to-react"
-				/>
-				<Resource
-					title="Learn Vite"
-					description="To learn more about Vite and how you can customize it to fit your needs, take a look at their excellent documentation"
-					href="https://vitejs.dev"
-				/>
-			</section>
-		</div>
-	);
-}
+	const [message, setMessage] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 
-function Resource(props) {
+	useEffect(() => {
+		fetchAPI()
+	}, []);
+
+	function fetchAPI() {
+		axios.get('/api/message.php')
+		.then((res) => {
+			console.log(res.data)
+			setMessage(res.data.message);
+		})
+		.catch((err) => {
+			setErrorMessage(err.message)
+			setMessage('');
+		})
+	}
+	
 	return (
-		<a href={props.href} target="_blank" class="resource">
-			<h2>{props.title}</h2>
-			<p>{props.description}</p>
-		</a>
+		<main class="min-h-screen bg-gray-50 p-6 font-sans">
+			<header class="mb-6">
+				<h1 class="text-2xl font-bold text-gray-800">Agent Tools Dashboard</h1>
+				{message && <p class="text-green-700 mt-2">{message}</p>}
+				{errorMessage && <p class="text-red-600 mt-2">{errorMessage}</p>}
+			</header>
+
+			<TicketDashboard />
+		</main>
 	);
 }
