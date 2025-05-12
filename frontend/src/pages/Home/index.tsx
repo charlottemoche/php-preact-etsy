@@ -22,7 +22,7 @@ export function Home() {
 				<ul class="list-disc list-inside text-sm text-gray-700 space-y-1 ml-4">
 					<li>View all open and/or resolved tickets</li>
 					<li>Resolve, escalate, or comment on tickets</li>
-					<li>Filter tickets by date, priority, or status</li>
+					<li>Filter tickets by date or status</li>
 					<li>Export tickets to CSV</li>
 				</ul>
 			</section>

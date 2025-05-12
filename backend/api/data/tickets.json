@@ -1,18 +1,24 @@
 [
-  {
-    "id": "1234",
-    "issue": "Late delivery",
-    "details": "Customer did not receive the item on time.",
-    "status": "open",
-    "escalated": false,
-    "notes": []
-  },
-  {
-    "id": "1235",
-    "issue": "Wrong item",
-    "details": "Sent red shoes instead of black.",
-    "status": "resolved",
-    "escalated": true,
-    "notes": ["Refunded", "Sent replacement"]
-  }
+    {
+        "id": "1234",
+        "issue": "Late delivery",
+        "details": "Customer did not receive the item on time.",
+        "status": "resolved",
+        "escalated": true,
+        "notes": [],
+        "created_at": "2024-12-10T14:30:00Z",
+        "updated_at": "2025-05-12T20:33:04+00:00"
+    },
+    {
+        "id": "1235",
+        "issue": "Wrong item",
+        "details": "Sent red shoes instead of black.",
+        "status": "resolved",
+        "escalated": true,
+        "notes": [
+            "Refunded",
+            "Sent replacement"
+        ],
+        "created_at": "2024-12-08T09:00:00Z"
+    }
 ]

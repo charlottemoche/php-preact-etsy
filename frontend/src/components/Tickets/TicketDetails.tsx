@@ -1,11 +1,21 @@
-import type { TicketType } from '../../types/ticket.js';
+import type { TicketType, TicketActionHandler } from '../../types/ticket.js';
+import { TicketActions } from './TicketActions.js';
 
-export function TicketDetails({ ticket }: { ticket: TicketType }) {
+type TicketDetailsProps = {
+	ticket: TicketType;
+	onAction: TicketActionHandler;
+};
+
+export function TicketDetails({ ticket, onAction }: TicketDetailsProps) {
 	return (
 		<div>
-			<h2 class="text-xl font-bold mb-4">Ticket #{ticket.id}</h2>
-			<p class="mb-2"><strong>Issue:</strong> {ticket.issue}</p>
-			<p class="mb-4"><strong>Details:</strong> {ticket.details}</p>
+			<h2 class="text-xl font-semibold mb-4 border-b pb-2">Ticket #{ticket.id}</h2>
+			<p class="mb-2"><span class="font-semibold">Issue:</span> {ticket.issue}</p>
+			<p><span class="font-semibold">Details:</span> {ticket.details}</p>
+
+			<div class="border-t mt-4">
+			<TicketActions ticket={ticket} onAction={onAction} />
+			</div>
 		</div>
 	);
 }

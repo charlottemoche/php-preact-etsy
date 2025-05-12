@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'preact/hooks';
 import { useRoute } from 'preact-iso';
-import axios from 'axios';
-import type { TicketType } from '../../types/ticket.js';
+import type { TicketType, TicketActionType } from '../../types/ticket.js';
 import { TicketDetails } from '../../components/Tickets/TicketDetails.js';
+import { updateTicket } from '../../lib/updateTicket.js';
+import axios from 'axios';
 
 export function TicketDetailsPage() {
 	const { params } = useRoute();
@@ -11,6 +12,19 @@ export function TicketDetailsPage() {
 	const [ticket, setTicket] = useState<TicketType | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
+
+	const refreshTicket = () => {
+		axios.get(`/api/tickets.php?id=${id}`).then(res => setTicket(res.data));
+	};
+
+	function handleAction(type: TicketActionType) {
+		if (!ticket) return;
+		updateTicket({ ticket, action: type })
+			.then(refreshTicket)
+			.catch((err) => {
+				console.error("Failed to update ticket:", err);
+			});
+	}
 
 	useEffect(() => {
 		const fetchTicket = async () => {
@@ -37,7 +51,7 @@ export function TicketDetailsPage() {
 				<a href="/tickets" class="text-gray-800 hover:text-black hover:underline">← Back to dashboard</a>
 			</div>
 			<div class="bg-white p-4 rounded shadow max-w-2xl mx-auto">
-				<TicketDetails ticket={ticket} />
+				<TicketDetails ticket={ticket} onAction={handleAction} />
 			</div>
 		</main>
 	);

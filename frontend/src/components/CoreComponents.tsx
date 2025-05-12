@@ -4,6 +4,7 @@ type ButtonProps = {
   variant?: 'green' | 'yellow' | 'gray';
   classes?: string;
   type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
 };
 
 const variantClasses = {
@@ -12,15 +13,24 @@ const variantClasses = {
   gray: 'bg-gray-300 hover:bg-gray-400',
 };
 
-const Button = ({ onClick, children, variant = 'gray', classes = '', type = 'button' }: ButtonProps) => {
+const Button = ({
+  onClick,
+  children,
+  variant = 'gray',
+  classes = '',
+  type = 'button',
+  disabled = false,
+}: ButtonProps) => {
   const base = 'px-2 py-1 rounded text-sm';
   const variantClass = variantClasses[variant] || variantClasses.gray;
+  const disabledClass = disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : '';
 
   return (
     <button
       type={type}
       onClick={onClick}
-      class={`${variantClass} ${base} ${classes}`}
+      disabled={disabled}
+      class={`${variantClass} ${base} ${disabledClass} ${classes}`}
     >
       {children}
     </button>
