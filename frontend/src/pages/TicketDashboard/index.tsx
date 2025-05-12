@@ -1,13 +1,30 @@
-import { Ticket } from '../../components/Ticket.js';
+import { Ticket } from '../../components/Tickets/Ticket.js';
 import { TicketType } from '../../types/ticket.js';
+import { useEffect, useState } from 'preact/hooks';
+import axios from 'axios';
 
-type TicketDashboardProps = {
-	tickets: TicketType[];
-};
+export function TicketDashboard() {
+	const [tickets, setTickets] = useState<TicketType[]>([]);
 
-export function TicketDashboard({ tickets }: TicketDashboardProps) {
+	useEffect(() => {
+		fetchTickets();
+	}, []);
+
+	function fetchTickets() {
+		axios.get('/api/tickets.php')
+			.then((res) => {
+				setTickets(res.data);
+			})
+			.catch((err) => {
+				console.error("Error fetching tickets:", err);
+			});
+	}
+
 	return (
-		<div>
+		<main>
+			<header class="mb-6">
+				<h1 class="text-2xl font-bold text-gray-800">Ticket Dashboard</h1>
+			</header>
 			<section class="bg-white p-4 rounded shadow max-w-xl">
 				<h2 class="text-lg font-semibold mb-2">Open Support Tickets</h2>
 				<ul class="space-y-4">
@@ -21,6 +38,6 @@ export function TicketDashboard({ tickets }: TicketDashboardProps) {
 					))}
 				</ul>
 			</section>
-		</div>
+		</main>
 	);
 }

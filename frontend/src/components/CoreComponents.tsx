@@ -7,8 +7,8 @@ type ButtonProps = {
 };
 
 const variantClasses = {
-  green: 'bg-green-500 hover:bg-green-600 text-white',
-  yellow: 'bg-yellow-500 hover:bg-yellow-600 text-white',
+  green: 'bg-green-700 hover:bg-green-800 text-white',
+  yellow: 'bg-yellow-600 hover:bg-yellow-700 text-white',
   gray: 'bg-gray-300 hover:bg-gray-400',
 };
 
