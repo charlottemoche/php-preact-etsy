@@ -21,7 +21,7 @@ export function TicketActions({ ticket, onAction }: TicketActionsProps) {
 	return (
 		<div class="pt-4 flex gap-2 shrink-0">
 			<Button
-				variant="green"
+				variant={status === 'resolved' ? 'blue' : 'green'}
 				onClick={(e) => handleClick(e, status === 'resolved' ? 'reopen' : 'resolve')}
 			>
 				{status === 'resolved' ? 'Reopen' : 'Resolve'}
