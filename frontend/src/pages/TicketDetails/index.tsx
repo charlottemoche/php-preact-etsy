@@ -1,32 +1,41 @@
 import { useEffect, useState } from 'preact/hooks';
 import { useRoute } from 'preact-iso';
-import { updateTicket } from '../../lib/updateTicket.js';
 import { TicketDetails } from '../../components/Tickets/TicketDetails.js';
-import type { TicketType, TicketActionType } from '../../types/ticket.js';
-import type { Note } from '../../types/ticket.js';
+import type { TicketType, TicketActionType, Note } from '../../types/ticket.js';
 import axios from 'axios';
 
 export function TicketDetailsPage() {
 	const { params } = useRoute();
 	const id = params.id;
+
 	const [ticket, setTicket] = useState<TicketType | null>(null);
+	const [notes, setNotes] = useState<Note[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
-	const [notes, setNotes] = useState<Note[]>([]);
 
-	const refreshTicket = () => {
-		axios.get(`/api/tickets.php?id=${id}`).then(res => setTicket(res.data));
-		axios.get(`/api/notes.php?ticket_id=${id}`).then(res => setNotes(res.data));
+	const refreshTicket = async () => {
+		try {
+			const [ticketRes, notesRes] = await Promise.all([
+				axios.get(`/api/tickets/${id}`),
+				axios.get(`/api/tickets/${id}/notes`)
+			]);
+
+			setTicket(ticketRes.data);
+			setNotes(notesRes.data);
+			setError(null);
+		} catch (err) {
+			console.error("Could not load ticket or notes:", err);
+			setError("Could not load ticket.");
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	function handleAction(type: TicketActionType, note?: string) {
 		if (!ticket) return;
 
 		if (type === 'note' && note) {
-			axios.post('/api/notes.php', {
-				ticket_id: ticket.id,
-				text: note,
-			})
+			axios.post(`/api/tickets/${ticket.id}/notes`, { text: note })
 				.then(refreshTicket)
 				.catch((err) => {
 					console.error("Failed to add note:", err);
@@ -34,7 +43,10 @@ export function TicketDetailsPage() {
 			return;
 		}
 
-		updateTicket({ ticket, action: type })
+		axios.patch(`/api/tickets/${ticket.id}`, {
+			status: type === 'resolve' ? 'resolved' : 'open',
+			escalated: type === 'escalate'
+		})
 			.then(refreshTicket)
 			.catch((err) => {
 				console.error("Failed to update ticket:", err);
@@ -42,21 +54,7 @@ export function TicketDetailsPage() {
 	}
 
 	useEffect(() => {
-		const fetchTicket = async () => {
-			try {
-				const res = await axios.get(`/api/tickets.php?id=${id}`);
-				setTicket(res.data);
-
-				const noteRes = await axios.get(`/api/notes.php?ticket_id=${id}`);
-				setNotes(noteRes.data);
-			} catch (err) {
-				setError("Could not load ticket.");
-			} finally {
-				setLoading(false);
-			}
-		};
-
-		fetchTicket();
+		refreshTicket();
 	}, [id]);
 
 	if (loading) return <p class="p-6 text-sm text-gray-500">Loading ticket...</p>;

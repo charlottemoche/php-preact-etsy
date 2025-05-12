@@ -16,8 +16,7 @@ export function useTicketActions({
 
 		if (type === 'note' && note) {
 			await axios
-				.post('/api/notes.php', {
-					ticket_id: ticket.id,
+				.post(`/api/tickets/${ticket.id}`, {
 					text: note,
 				})
 				.then(fetchTickets)

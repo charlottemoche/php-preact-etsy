@@ -23,8 +23,8 @@ export function TicketDashboard() {
 	function fetchTickets() {
 		const url =
 			filter === 'all'
-				? '/api/tickets.php'
-				: `/api/tickets.php?status=${filter}`;
+				? '/api/tickets'
+				: `/api/tickets?status=${filter}`;
 
 		axios
 			.get(url)

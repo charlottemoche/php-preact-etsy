@@ -25,5 +25,5 @@ export async function updateTicket({
 			return;
 	}
 
-	await axios.patch(`/api/tickets.php?id=${ticket.id}`, update);
+	await axios.patch(`/api/tickets/${ticket.id}`, update)
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
-import { BarChart3, CheckCircle, AlertTriangle, FileText, MessageSquare } from 'lucide-preact'; // icons
+import { BarChart3, CheckCircle, AlertTriangle, FileText, MessageSquare } from 'lucide-preact';
 
 export function MetricsPanel() {
 	const [metrics, setMetrics] = useState<null | {
@@ -11,7 +11,7 @@ export function MetricsPanel() {
 	}>(null);
 
 	useEffect(() => {
-		fetch('/api/metrics.php')
+		fetch('/api/metrics')
 			.then(res => res.json())
 			.then(setMetrics)
 			.catch(console.error);

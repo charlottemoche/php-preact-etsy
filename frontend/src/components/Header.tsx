@@ -6,8 +6,8 @@ export function Header() {
 
 	return (
 		<header class="w-full bg-brand">
-			<nav class="flex gap-2 justify-between items-center py-4 2xl:px-40">
-				<img src={etsyLogo} alt="Preact logo" height="50" width="50" class="invert" />
+			<nav class="flex gap-2 justify-between items-center py-4 2xl:px-48">
+				<img src={etsyLogo} alt="Preact logo" class="invert pl-4 2xl:pl-0 w-16 2xl:w-12" />
 				<div class="space-x-4 items-center text-white px-4">
 					<a
 						href="/"

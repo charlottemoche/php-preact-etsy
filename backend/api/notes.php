@@ -2,43 +2,42 @@
 header("Content-Type: application/json");
 
 $notesFile = __DIR__ . '/data/notes.json';
-$notes = json_decode(file_get_contents($notesFile), true);
+$notesRaw = json_decode(file_get_contents($notesFile), true);
 $method = $_SERVER['REQUEST_METHOD'];
+$ticketId = $_GET['id'] ?? null;
+
+if (!$ticketId || !is_numeric($ticketId)) {
+	http_response_code(400);
+	echo json_encode(["error" => "Invalid ticket ID"]);
+	exit;
+}
 
 if ($method === 'GET') {
-  $ticketId = $_GET['ticket_id'] ?? null;
-
-  if (!$ticketId) {
-    http_response_code(400);
-    echo json_encode(["error" => "Missing ticket_id"]);
-    exit;
-  }
-
-  $filtered = array_values(array_filter($notes, fn($n) => $n['ticket_id'] == $ticketId));
-  echo json_encode($filtered);
-  exit;
+	$filtered = array_values(array_filter($notesRaw, fn($n) => $n['ticket_id'] == $ticketId));
+	echo json_encode($filtered);
+	exit;
 }
 
 if ($method === 'POST') {
-  $data = json_decode(file_get_contents('php://input'), true);
-  if (!isset($data['ticket_id']) || !isset($data['text'])) {
-    http_response_code(400);
-    echo json_encode(["error" => "Missing ticket_id or text"]);
-    exit;
-  }
+	$data = json_decode(file_get_contents('php://input'), true);
+	if (!isset($data['text']) || trim($data['text']) === '') {
+		http_response_code(400);
+		echo json_encode(["error" => "Missing note text"]);
+		exit;
+	}
 
-  $newNote = [
-    "id" => count($notes) > 0 ? max(array_column($notes, 'id')) + 1 : 1,
-    "ticket_id" => $data['ticket_id'],
-    "text" => $data['text'],
-    "created_at" => date('c')
-  ];
+	$newNote = [
+		"id" => count($notesRaw) > 0 ? max(array_column($notesRaw, 'id')) + 1 : 1,
+		"ticket_id" => (int)$ticketId,
+		"text" => trim($data['text']),
+		"created_at" => date('c')
+	];
 
-  $notes[] = $newNote;
-  file_put_contents($notesFile, json_encode($notes, JSON_PRETTY_PRINT));
+	$notesRaw[] = $newNote;
+	file_put_contents($notesFile, json_encode($notesRaw, JSON_PRETTY_PRINT));
 
-  echo json_encode($newNote);
-  exit;
+	echo json_encode($newNote);
+	exit;
 }
 
 http_response_code(405);

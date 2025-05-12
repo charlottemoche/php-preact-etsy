@@ -1,74 +1,61 @@
 <?php
 header("Content-Type: application/json");
 
-$dataFile = __DIR__ . '/data/tickets.json';
-
-$ticketsRaw = json_decode(file_get_contents($dataFile), true);
+$ticketsFile = __DIR__ . '/data/tickets.json';
+$ticketsRaw = json_decode(file_get_contents($ticketsFile), true);
 
 $tickets = [];
 foreach ($ticketsRaw as $t) {
-  $tickets[$t['id']] = $t;
+	$tickets[$t['id']] = $t;
 }
-
-$status = $_GET['status'] ?? null;
-$id = $_GET['id'] ?? null;
 
 $method = $_SERVER['REQUEST_METHOD'];
+$id = $_GET['id'] ?? null;
+$status = $_GET['status'] ?? null;
 
-if ($method === 'PATCH') {
-  if (!$id) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Missing ticket ID']);
-    exit;
-  }
+if ($method === 'PATCH' && $id) {
+	if (!isset($tickets[$id])) {
+		http_response_code(404);
+		echo json_encode(['error' => 'Ticket not found']);
+		exit;
+	}
 
-  $data = json_decode(file_get_contents('php://input'), true);
+	$data = json_decode(file_get_contents('php://input'), true);
+	$existing = $tickets[$id];
 
-  if (!isset($tickets[$id])) {
-    http_response_code(404);
-    echo json_encode(['error' => 'Ticket not found']);
-    exit;
-  }
+	foreach ($data as $key => $value) {
+		if ($key === 'notes') continue;
+		$existing[$key] = $value;
+	}
 
-  $existing = $tickets[$id];
+	$existing['updated_at'] = date('c');
+	$tickets[$id] = $existing;
 
-  foreach ($data as $key => $value) {
-    if ($key === 'notes' && isset($value) && is_array($value)) {
-      if (!isset($existing['notes']) || !is_array($existing['notes'])) {
-        $existing['notes'] = [];
-      }
-      $existing['notes'] = array_merge($existing['notes'], $value);
-    } else {
-      $existing[$key] = $value;
-    }
-  }
-
-  $existing['updated_at'] = date('c');
-  $tickets[$id] = $existing;
-
-  $tickets[$id]['updated_at'] = date('c');
-
-  file_put_contents($dataFile, json_encode(array_values($tickets), JSON_PRETTY_PRINT));
-  echo json_encode($tickets[$id]);
-  exit;
+	file_put_contents($ticketsFile, json_encode(array_values($tickets), JSON_PRETTY_PRINT));
+	echo json_encode($tickets[$id]);
+	exit;
 }
 
-if ($id && $method === 'GET') {
-  if (isset($tickets[$id])) {
-    echo json_encode($tickets[$id]);
-  } else {
-    http_response_code(404);
-    echo json_encode(["error" => "Ticket not found"]);
-  }
-  exit;
+if ($method === 'GET' && $id) {
+	if (!isset($tickets[$id])) {
+		http_response_code(404);
+		echo json_encode(["error" => "Ticket not found"]);
+		exit;
+	}
+
+	echo json_encode($tickets[$id]);
+	exit;
 }
 
-if ($status) {
-  $tickets = array_filter($tickets, function ($ticket) use ($status) {
-    return $ticket['status'] === $status;
-  });
+if ($method === 'GET') {
+	$result = $tickets;
+	if ($status) {
+		$result = array_filter($result, fn($ticket) => $ticket['status'] === $status);
+	}
+
+	echo json_encode(array_values($result));
+	exit;
 }
 
-error_log("GET params: " . json_encode($_GET));
-
-echo json_encode(array_values($tickets));
+http_response_code(405);
+echo json_encode(["error" => "Method not allowed"]);
