@@ -13,7 +13,7 @@ export function Home() {
 				<ol class="list-decimal list-inside text-sm text-gray-700 space-y-1 ml-4">
 					<li>Click <span class="font-medium">Dashboard</span> to view open tickets</li>
 					<li>Use action buttons to resolve or escalate tickets</li>
-					<li>Click a ticket to view full details or add notes</li>
+					<li>Click a ticket to view full details and notes</li>
 				</ol>
 			</section>
 
@@ -23,13 +23,14 @@ export function Home() {
 					<li>View all open and/or resolved tickets</li>
 					<li>Resolve, escalate, or comment on tickets</li>
 					<li>Filter tickets by date or status</li>
+					<li>View ticket details and history</li>
 				</ul>
 			</section>
 
 			<div class="mt-8">
 				<a
 					href="/tickets"
-					class="inline-block bg-brand text-white px-4 py-2 rounded text-sm hover:bg-orange-600 transition"
+					class="inline-block bg-green-700 text-white px-4 py-2 rounded text-sm hover:bg-green-800 transition"
 				>
 					Go to Dashboard
 				</a>

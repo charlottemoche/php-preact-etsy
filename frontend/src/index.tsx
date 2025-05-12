@@ -11,7 +11,7 @@ export function App() {
 	return (
 		<LocationProvider>
 			<Header />
-			<main class="min-h-[calc(100vh-96px)] bg-gray-50 p-6">
+			<main class="min-h-[calc(100vh-96px)] bg-gray-50 p-6 2xl:px-40">
 				<Router>
 					<Route path="/" component={Home} />
 					<Route path="/tickets" component={TicketDashboard} />
