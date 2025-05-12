@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp -R ../dist/assets ../public/",
+    "build": "vite build",
     "watch": "chokidar 'src/**/*' 'index.html' -c 'npm run build'",
     "preview": "vite preview"
   },
