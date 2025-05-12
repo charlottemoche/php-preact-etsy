@@ -94,7 +94,7 @@ export function TicketDashboard() {
 							<Ticket
 								key={ticket.id}
 								ticket={ticket}
-								onAction={(type) => handleAction(ticket.id, type)}
+								onAction={(type, note) => handleAction(ticket.id, type, note)}
 							/>
 						))}
 					</ul>

@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "ticket_id": "1234",
+        "text": "Please reopen this ticket, thanks!",
+        "created_at": "2025-05-12T22:14:20+00:00"
+    },
+    {
+        "id": 2,
+        "ticket_id": "1235",
+        "text": "Please help.",
+        "created_at": "2025-05-12T22:21:00+00:00"
+    }
+]

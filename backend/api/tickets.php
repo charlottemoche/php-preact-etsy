@@ -30,7 +30,22 @@ if ($method === 'PATCH') {
     exit;
   }
 
-  $tickets[$id] = array_merge($tickets[$id], $data);
+  $existing = $tickets[$id];
+
+  foreach ($data as $key => $value) {
+    if ($key === 'notes' && isset($value) && is_array($value)) {
+      if (!isset($existing['notes']) || !is_array($existing['notes'])) {
+        $existing['notes'] = [];
+      }
+      $existing['notes'] = array_merge($existing['notes'], $value);
+    } else {
+      $existing[$key] = $value;
+    }
+  }
+
+  $existing['updated_at'] = date('c');
+  $tickets[$id] = $existing;
+
   $tickets[$id]['updated_at'] = date('c');
 
   file_put_contents($dataFile, json_encode(array_values($tickets), JSON_PRETTY_PRINT));

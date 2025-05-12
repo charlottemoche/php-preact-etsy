@@ -3,7 +3,7 @@ import type { TicketType, TicketActionType } from '../types/ticket.js';
 
 export async function updateTicket({
 	ticket,
-	action,
+	action
 }: {
 	ticket: TicketType;
 	action: TicketActionType;
@@ -14,15 +14,11 @@ export async function updateTicket({
 		case 'resolve':
 			update = { status: 'resolved' };
 			break;
+		case 'reopen':
+			update = { status: 'open' };
+			break;
 		case 'escalate':
 			update = { escalated: true };
-			break;
-		case 'note':
-			const note = prompt("Add a note:");
-			if (!note) return;
-			update = {
-				notes: [...(ticket.notes ?? []), note],
-			};
 			break;
 		default:
 			console.warn(`Unknown action type: ${action}`);

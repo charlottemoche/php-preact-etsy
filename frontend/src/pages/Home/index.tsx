@@ -23,7 +23,6 @@ export function Home() {
 					<li>View all open and/or resolved tickets</li>
 					<li>Resolve, escalate, or comment on tickets</li>
 					<li>Filter tickets by date or status</li>
-					<li>Export tickets to CSV</li>
 				</ul>
 			</section>
 
