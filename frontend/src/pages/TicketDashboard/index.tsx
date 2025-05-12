@@ -30,8 +30,8 @@ export function TicketDashboard() {
 				<ul class="space-y-4">
 					{tickets.map((ticket) => (
 						<Ticket
-							key={ticket.orderId}
-							id={ticket.orderId}
+							key={ticket.id}
+							id={ticket.id}
 							issue={ticket.issue}
 							details={ticket.details}
 						/>

@@ -1,5 +1,5 @@
 export type TicketType = {
-  orderId: string;
+  id: string;
   issue: string;
   details: string;
 };
