@@ -10,7 +10,7 @@ export function Header() {
 				<img src={etsyLogo} alt="Preact logo" height="80" width="80" class="invert px-4" />
 				<div class="space-x-4 items-center text-white px-4">
 					<a href="/" class={url == '/' && 'active'}>
-						Home
+						Dashboard
 					</a>
 					<a href="/help" class={url == '/help' && 'active'}>
 						Help

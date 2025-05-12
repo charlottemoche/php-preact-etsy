@@ -1,10 +1,9 @@
 import { render } from 'preact';
 import { LocationProvider, Router, Route } from 'preact-iso';
-
-import { Header } from './components/Header.jsx';
-import { Home } from './pages/Home/index.jsx';
-import { TicketDashboard } from './pages/TicketDashboard/index.jsx';
-import { Help } from './pages/Help/index.jsx'
+import { Header } from './components/Header.js';
+import { Home } from './pages/Home/index.js';
+import { TicketDashboard } from './pages/TicketDashboard/index.js';
+import { Help } from './pages/Help/index.js'
 import './style.css';
 
 export function App() {
