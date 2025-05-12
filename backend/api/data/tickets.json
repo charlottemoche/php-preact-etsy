@@ -1,12 +1,18 @@
-{
-  "1234": {
+[
+  {
     "id": "1234",
-    "issue": "Item not delivered",
-    "details": "Customer reports non-delivery 7 days post expected date."
+    "issue": "Late delivery",
+    "details": "Customer did not receive the item on time.",
+    "status": "open",
+    "escalated": false,
+    "notes": []
   },
-  "5678": {
-    "id": "5678",
-    "issue": "Refund request denied",
-    "details": "Escalated refund due to prior denial, needs manual review."
+  {
+    "id": "1235",
+    "issue": "Wrong item",
+    "details": "Sent red shoes instead of black.",
+    "status": "resolved",
+    "escalated": true,
+    "notes": ["Refunded", "Sent replacement"]
   }
-}
+]

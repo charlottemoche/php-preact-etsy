@@ -7,11 +7,6 @@ if (str_starts_with($request, '/api/tickets')) {
   exit;
 }
 
-if (str_starts_with($request, '/api/message')) {
-  include 'message.php';
-  exit;
-}
-
 if (str_starts_with($request, '/api/notes')) {
   include 'notes.php';
   exit;
