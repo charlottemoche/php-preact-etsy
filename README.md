@@ -1,15 +1,29 @@
+## Start project
+
 ### Install frontend dependencies
 `cd frontend`
 
 `npm install`
 
-### Build the frontend into the public folder
+### From inside /frontend
 `npm run build`
 
-### From the project root, start the PHP server using the router
+### Optional, watch css to see changes
+`npm run watch`
+
+### Start the PHP server from the project root
 `php -S localhost:8000 -t public router.php`
 
-## Front end
+## Project Specs
+
+### Full stack
+Built with Preact + PHP
+
+Supports ticket resolution, escalation, and internal notes
+
+Tickets can be filtered by status and sorted by created date
+
+### Frontend
 Inline ticket updates
 
 Imports tailwind css
@@ -19,13 +33,15 @@ Supports light and dark modes
 Mobile-responsive
 
 
-## Back end
+### Backend
 RESTful API endpoints
 
-Writes to local json files
+Data stored in local JSON files
 
-## In the future
+### In the future
 Add testing (PHPUnit, vitest)
+
+Support pagination
 
 Form validation and error handling
 
