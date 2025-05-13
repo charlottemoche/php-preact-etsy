@@ -5,7 +5,6 @@ import { useTicketActions } from '../../hooks/useTicketActions.js';
 import { MetricsPanel } from '../../components/MetricsPanel.js';
 import { useTickets } from '../../hooks/useTickets.js';
 import { Select } from '../../components/CoreComponents.js';
-import { h } from 'preact';
 
 export function TicketDashboard() {
 	const [queryKey, setQueryKey] = useState(0);
@@ -23,9 +22,16 @@ export function TicketDashboard() {
 		return sortOrder === 'newest' ? timeB - timeA : timeA - timeB;
 	});
 
-	function handleChangeFilter(e: Event) {
-		const selectedFilter = (e.target as HTMLSelectElement).value;
-		params.set('status', selectedFilter);
+	function handleChange(e: Event) {
+		const target = e.target as HTMLSelectElement;
+		const { value, id } = target;
+
+		if (id === 'filter') {
+			params.set('status', value);
+		} else if (id === 'sort') {
+			params.set('sort', value);
+		}
+
 		window.history.pushState({}, '', `/tickets?${params.toString()}`);
 		setQueryKey((prev) => prev + 1);
 	}
@@ -42,7 +48,7 @@ export function TicketDashboard() {
 							id="filter"
 							label="Show:"
 							value={filter}
-							onChange={handleChangeFilter}
+							onChange={handleChange}
 						>
 							<option value="all">All</option>
 							<option value="open">Open</option>
@@ -54,7 +60,7 @@ export function TicketDashboard() {
 							id="sort"
 							label="Sort:"
 							value={sortOrder}
-							onChange={handleChangeFilter}
+							onChange={handleChange}
 						>
 							<option value="newest">Newest First</option>
 							<option value="oldest">Oldest First</option>
