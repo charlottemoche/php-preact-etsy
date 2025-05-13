@@ -20,7 +20,7 @@ export function MetricsPanel() {
 	if (!metrics) return null;
 
 	const items = [
-		{ label: 'Total', value: metrics.total, icon: FileText, color: 'bg-gray-100' },
+		{ label: 'Total', value: metrics.total, icon: FileText, color: 'bg-gray-100 dark:bg-gray-700' },
 		{ label: 'Open', value: metrics.open, icon: BarChart3, color: 'bg-blue-100 text-blue-800' },
 		{ label: 'Resolved', value: metrics.resolved, icon: CheckCircle, color: 'bg-green-100 text-green-800' },
 		{ label: 'Escalated', value: metrics.escalated, icon: AlertTriangle, color: 'bg-yellow-100 text-yellow-800' },
@@ -29,16 +29,16 @@ export function MetricsPanel() {
 
 	return (
 		<div>
-			<h2 class="text-lg font-semibold text-gray-800 mb-4">Ticket Stats</h2>
-			<div class="bg-white rounded shadow p-4 w-full space-y-3">
+			<h2 class="text-lg font-semibold text-gray-800 dark:text-gray-300 mb-4">Ticket Stats</h2>
+			<div class="bg-white dark:bg-gray-800 dark:border dark:border-black rounded shadow p-4 w-full space-y-3">
 				{items.map(({ label, value, icon: Icon, color }) => (
-					<div class="flex items-center gap-3">
+					<div class="flex items-center gap-3 dark:bg-gray-900 p-2 rounded">
 						<div class={`rounded-full p-2 ${color}`}>
 							<Icon class="w-4 h-4" />
 						</div>
 						<div class="flex justify-between w-full items-center">
-							<p class="text-sm text-gray-600">{label}</p>
-							<p class="font-semibold text-gray-900">{value}</p>
+							<p class="text-sm text-gray-600 dark:text-gray-300">{label}</p>
+							<p class="font-medium text-sm">{value}</p>
 						</div>
 					</div>
 				))}

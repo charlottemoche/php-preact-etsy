@@ -15,11 +15,11 @@ export function TicketDetails({ ticket, notes, onAction }: TicketDetailsProps) {
 			<p><span class="font-semibold">Details:</span> {ticket.details}</p>
 
 			{notes.length > 0 && (
-				<div class="pt-4 text-sm space-y-1">
+				<div class="pt-4 text-sm space-y-2">
 					<p class="font-medium">Notes:</p>
 					{notes.map((note) => (
-						<p key={note.id} class="border-l-2 border-gray-300 pl-2 text-gray-600">
-							{note.text}
+						<p key={note.id} class="border-l-2 border-gray-300 pl-2">
+							<span class="text-gray-600 dark:text-gray-300">{note.text}</span>
 							<span class="block text-xs text-gray-400">
 								{new Date(note.created_at).toLocaleString()}
 							</span>

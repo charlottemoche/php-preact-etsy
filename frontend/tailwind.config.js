@@ -4,6 +4,10 @@ module.exports = {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: [
+    'dark:text-gray-200',
+    'dark:text-white',
+  ],
   theme: {
     extend: {
       colors: {

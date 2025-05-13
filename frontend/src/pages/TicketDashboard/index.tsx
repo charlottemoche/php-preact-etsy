@@ -1,6 +1,6 @@
+import { useEffect, useState } from 'preact/hooks';
 import { Ticket } from '../../components/Tickets/Ticket.js';
 import { TicketType } from '../../types/ticket.js';
-import { useEffect, useState } from 'preact/hooks';
 import { useTicketActions } from '../../hooks/useTicketActions.js';
 import { MetricsPanel } from '../../components/MetricsPanel.js';
 import axios from 'axios';
@@ -8,6 +8,8 @@ import axios from 'axios';
 export function TicketDashboard() {
 	const [queryKey, setQueryKey] = useState(0);
 	const [tickets, setTickets] = useState<TicketType[]>([]);
+	const [hasFetched, setHasFetched] = useState(false);
+
 	const params = new URLSearchParams(window.location.search);
 	const filter = (params.get('status') ?? 'all') as 'all' | 'open' | 'resolved';
 	const sortOrder = (params.get('sort') ?? 'newest') as 'newest' | 'oldest';
@@ -21,15 +23,15 @@ export function TicketDashboard() {
 	const { handleAction } = useTicketActions({ tickets, fetchTickets });
 
 	function fetchTickets() {
-		const url =
-			filter === 'all'
-				? '/api/tickets'
-				: `/api/tickets?status=${filter}`;
+		const url = filter === 'all'
+			? '/api/tickets'
+			: `/api/tickets?status=${filter}`;
 
 		axios
 			.get(url)
 			.then((res) => {
 				setTickets(res.data);
+				setHasFetched(true);
 			})
 			.catch((err) => {
 				console.error("Error fetching tickets:", err);
@@ -37,6 +39,7 @@ export function TicketDashboard() {
 	}
 
 	useEffect(() => {
+		setHasFetched(false);
 		fetchTickets();
 	}, [filter, queryKey]);
 
@@ -44,11 +47,11 @@ export function TicketDashboard() {
 		<main>
 			<div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6 pb-4 border-b">
 				<header>
-					<h1 class="text-2xl font-bold text-gray-800 border-b md:border-none pb-2 mb-2 md:pb-0 md:mb-0">Ticket Dashboard</h1>
+					<h1 class="text-2xl font-bold text-gray-800 dark:text-gray-300 border-b md:border-none pb-2 mb-2 md:pb-0 md:mb-0">Ticket Dashboard</h1>
 				</header>
 				<div class="flex gap-4 items-center">
 					<div>
-						<label htmlFor="filter" class="text-sm font-medium text-gray-700 mr-2">Show:</label>
+						<label htmlFor="filter" class="text-sm font-medium text-gray-700 dark:text-gray-400 mr-2">Show:</label>
 						<select
 							id="filter"
 							value={filter}
@@ -57,7 +60,7 @@ export function TicketDashboard() {
 								window.history.pushState({}, '', `/tickets?${params.toString()}`);
 								setQueryKey((prev) => prev + 1);
 							}}
-							class="border border-gray-300 rounded px-2 py-1 text-sm w-full"
+							class="border border-gray-300 rounded px-2 py-1 text-sm w-full dark:bg-gray-800"
 						>
 							<option value="all">All</option>
 							<option value="open">Open</option>
@@ -65,7 +68,7 @@ export function TicketDashboard() {
 						</select>
 					</div>
 					<div>
-						<label htmlFor="sort" class="text-sm font-medium text-gray-700 mr-2">Sort:</label>
+						<label htmlFor="sort" class="text-sm font-medium text-gray-700 dark:text-gray-400 mr-2">Sort:</label>
 						<select
 							id="sort"
 							value={sortOrder}
@@ -74,7 +77,7 @@ export function TicketDashboard() {
 								window.history.pushState({}, '', `/tickets?${params.toString()}`);
 								setQueryKey((prev) => prev + 1);
 							}}
-							class="border border-gray-300 rounded px-2 py-1 text-sm w-full"
+							class="border border-gray-300 rounded px-2 py-1 text-sm w-full dark:bg-gray-800"
 						>
 							<option value="newest">Newest First</option>
 							<option value="oldest">Oldest First</option>
@@ -82,23 +85,23 @@ export function TicketDashboard() {
 					</div>
 				</div>
 			</div>
+
 			<div class="flex flex-col md:flex-row gap-10 md:gap-20">
 				<section class="md:basis-1/3">
 					<MetricsPanel />
 				</section>
+
 				<section class="md:basis-2/3">
-					<h2 class="text-lg font-semibold text-gray-800 mb-4">
+					<h2 class="text-lg font-semibold text-gray-800 dark:text-gray-300 mb-4">
 						{filter === 'all' ? 'All Tickets' : filter.charAt(0).toUpperCase() + filter.slice(1) + ' Tickets'}
 					</h2>
 
-					{filteredTickets.length === 0 && (
-						<div class="text-gray-500">
-							<p>{filter === 'all' ? 'No tickets.' : `No ${filter} tickets.`}</p>
-						</div>
-					)}
-
-					{filteredTickets.length > 0 && (
-						<ul class="grid md:grid-cols-2 gap-6 bg-white p-4 rounded shadow">
+					{!hasFetched ? null : filteredTickets.length === 0 ? (
+						<p class="text-sm text-gray-500 dark:text-gray-300">
+							{filter === 'all' ? 'No tickets.' : `No ${filter} tickets.`}
+						</p>
+					) : (
+						<ul class="grid md:grid-cols-2 gap-6 bg-white dark:bg-gray-800 dark:border dark:border-black p-4 rounded shadow dark:shadow-2xl">
 							{filteredTickets.map((ticket) => (
 								<li key={ticket.id}>
 									<Ticket ticket={ticket} onAction={(type, note) => handleAction(ticket.id, type, note)} />

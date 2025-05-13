@@ -57,16 +57,16 @@ export function TicketDetailsPage() {
 		refreshTicket();
 	}, [id]);
 
-	if (loading) return <p class="p-6 text-sm text-gray-500">Loading ticket...</p>;
+	if (loading) return <p class="p-6 text-sm text-gray-500 dark:text-gray-300">Loading ticket...</p>;
 	if (error) return <p class="p-6 text-red-500">{error}</p>;
-	if (!ticket) return <p class="p-6 text-gray-500">Ticket not found.</p>;
+	if (!ticket) return <p class="p-6 text-gray-500 dark:text-gray-300">Ticket not found.</p>;
 
 	return (
 		<main>
 			<div class="mb-6">
-				<a href="/tickets" class="text-gray-800 hover:text-black hover:underline">← Back to dashboard</a>
+				<a href="/tickets" class="text-gray-800 dark:text-gray-300 hover:text-black dark:hover:text-gray-100 hover:underline">← Back to dashboard</a>
 			</div>
-			<div class="bg-white p-4 rounded shadow max-w-2xl mx-auto">
+			<div class="bg-white dark:bg-gray-900 p-4 rounded shadow max-w-2xl mx-auto">
 				<TicketDetails ticket={ticket} notes={notes} onAction={handleAction} />
 			</div>
 		</main>
