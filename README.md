@@ -1,3 +1,6 @@
+## Loom walkthrough
+https://www.loom.com/share/b369b8514a0345c8a7ca7c551476253e
+
 ## Start project
 
 ### Install frontend dependencies
