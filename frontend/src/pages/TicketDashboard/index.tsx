@@ -86,12 +86,12 @@ export function TicketDashboard() {
 				</div>
 			</div>
 
-			<div class="flex flex-col md:flex-row gap-10 md:gap-20">
-				<section class="md:basis-1/3">
+			<div class="flex flex-col md:flex-row gap-10 lg:gap-20">
+				<section class="md:basis-1/4">
 					<MetricsPanel />
 				</section>
 
-				<section class="md:basis-2/3">
+				<section class="md:basis-3/4">
 					<h2 class="text-lg font-semibold text-gray-800 dark:text-gray-300 mb-4">
 						{filter === 'all' ? 'All Tickets' : filter.charAt(0).toUpperCase() + filter.slice(1) + ' Tickets'}
 					</h2>
@@ -101,7 +101,7 @@ export function TicketDashboard() {
 							{filter === 'all' ? 'No tickets.' : `No ${filter} tickets.`}
 						</p>
 					) : (
-						<ul class="grid md:grid-cols-2 gap-6 bg-white dark:bg-dark-2 dark:border dark:border-black p-4 rounded shadow dark:shadow-2xl">
+						<ul class="grid md:grid-cols-2 gap-6 bg-white dark:bg-dark-2 dark:border dark:border-black p-6 rounded shadow dark:shadow-2xl">
 							{filteredTickets.map((ticket) => (
 								<li key={ticket.id}>
 									<Ticket ticket={ticket} onAction={(type, note) => handleAction(ticket.id, type, note)} />

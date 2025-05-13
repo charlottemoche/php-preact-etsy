@@ -1,4 +1,5 @@
 import { useLocation } from 'preact-iso';
+import { ThemeToggle } from './Theme';
 import etsyLogo from '../assets/etsy-nav.svg';
 
 export function Header() {
@@ -7,7 +8,7 @@ export function Header() {
 	return (
 		<header class="w-full bg-brand dark:text-gray-900">
 			<nav class="flex gap-2 justify-between items-center py-4 2xl:px-48">
-				<img src={etsyLogo} alt="Preact logo" class="invert dark:invert-0 pl-4 2xl:pl-0 w-16 2xl:w-12 2xl:mt-1" />
+				<img src={etsyLogo} alt="Preact logo" class="invert dark:invert-0 pl-4 mt-1 2xl:pl-0 w-16 2xl:w-12" />
 				<div class="space-x-4 items-center text-white dark:text-gray-900 px-4 2xl:px-0">
 					<a
 						href="/"
@@ -30,6 +31,7 @@ export function Header() {
 					>
 						Help
 					</a>
+					<ThemeToggle />
 				</div>
 			</nav>
 		</header>
