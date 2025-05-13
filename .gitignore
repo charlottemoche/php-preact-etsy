@@ -1,2 +1,4 @@
 /public/index.html
 /public/assets/
+/vendor/
+/.phpunit.result.cache
