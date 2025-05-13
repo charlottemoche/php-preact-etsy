@@ -5,28 +5,26 @@ import axios from 'axios';
 
 export function useTicketActions({
 	tickets,
+	ticket,
 	fetchTickets,
 }: {
-	tickets: TicketType[];
+	tickets?: TicketType[];
+	ticket?: TicketType;
 	fetchTickets: () => void;
 }) {
 	async function handleAction(id: string, type: TicketActionType, note?: string) {
-		const ticket = tickets.find((t) => t.id === id);
-		if (!ticket) return;
+		const targetTicket = tickets?.find((t) => t.id === id) ?? ticket;
+		if (!targetTicket) return;
 
 		if (type === 'note' && note) {
 			await axios
-				.post(`/api/tickets/${ticket.id}`, {
-					text: note,
-				})
+				.post(`/api/tickets/${targetTicket.id}/notes`, { text: note })
 				.then(fetchTickets)
-				.catch((err) => {
-					console.error("Failed to add note:", err);
-				});
+				.catch((err) => console.error("Failed to add note:", err));
 			return;
 		}
 
-		await updateTicket({ ticket, action: type });
+		await updateTicket({ ticket: targetTicket, action: type });
 		fetchTickets();
 	}
 

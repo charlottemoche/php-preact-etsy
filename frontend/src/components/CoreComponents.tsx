@@ -1,3 +1,5 @@
+import { JSX } from 'preact';
+
 type ButtonProps = {
   onClick?: (e: MouseEvent) => void;
   children: preact.ComponentChildren;
@@ -16,7 +18,7 @@ const variantClasses = {
   white: 'bg-white text-gray-800 dark:text-gray-300 hover:bg-gray-100'
 };
 
-const Button = ({
+export const Button = ({
   onClick,
   children,
   variant = 'gray',
@@ -40,4 +42,34 @@ const Button = ({
   );
 };
 
-export default Button;
+type SelectProps = JSX.IntrinsicElements['select'] & {
+  label?: string;
+  classes?: string;
+};
+
+export const Select = ({
+  label,
+  id,
+  classes = '',
+  disabled = false,
+  ...props
+}: SelectProps) => {
+  const base = 'border border-gray-300 rounded px-2 py-1 text-sm w-full dark:bg-dark-2';
+  const disabledClass = disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : '';
+
+  return (
+    <div>
+      {label && id && (
+        <label htmlFor={id} class="text-sm font-medium text-gray-700 dark:text-gray-400 mr-2">
+          {label}
+        </label>
+      )}
+      <select
+        id={id}
+        class={`${base} ${disabledClass} ${classes}`}
+        disabled={disabled}
+        {...props}
+      />
+    </div>
+  );
+};

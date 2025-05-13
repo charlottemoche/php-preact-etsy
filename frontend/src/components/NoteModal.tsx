@@ -1,5 +1,5 @@
 import { useState } from 'preact/hooks';
-import Button from './CoreComponents.js';
+import { Button } from './CoreComponents.js';
 
 export function NoteModal({
 	onSubmit,
@@ -15,7 +15,7 @@ export function NoteModal({
 			<div class="bg-white dark:bg-dark rounded-lg shadow-lg p-4 w-full max-w-md">
 				<h3 class="text-lg font-semibold mb-2">Add a Note</h3>
 				<textarea
-					class="w-full border border-gray-300 rounded p-2 text-sm"
+					class="w-full border border-gray-300 rounded p-2 text-sm dark:bg-dark-2"
 					rows={4}
 					value={note}
 					onInput={(e) => setNote(e.currentTarget.value)}

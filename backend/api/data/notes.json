@@ -22,5 +22,17 @@
         "ticket_id": 1236,
         "text": "Oh no let's fix this.",
         "created_at": "2025-05-12T23:33:36+00:00"
+    },
+    {
+        "id": 5,
+        "ticket_id": 1234,
+        "text": "I will help you.",
+        "created_at": "2025-05-13T13:13:55+00:00"
+    },
+    {
+        "id": 6,
+        "ticket_id": 1236,
+        "text": "Ahh",
+        "created_at": "2025-05-13T14:06:59+00:00"
     }
 ]

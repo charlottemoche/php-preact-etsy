@@ -48,7 +48,24 @@ if ($method === 'GET' && $id) {
 }
 
 if ($method === 'GET') {
-	$result = $tickets;
+	$notesFile = __DIR__ . '/data/notes.json';
+	$notesRaw = json_decode(file_get_contents($notesFile), true);
+
+	$noteCounts = [];
+	foreach ($notesRaw as $note) {
+		$id = (string)$note['ticket_id'];
+		if (!isset($noteCounts[$id])) {
+			$noteCounts[$id] = 0;
+		}
+		$noteCounts[$id]++;
+	}
+
+	$result = array_map(function ($ticket) use ($noteCounts) {
+		$id = (string)$ticket['id'];
+		$ticket['note_count'] = $noteCounts[$id] ?? 0;
+		return $ticket;
+	}, $tickets);
+
 	if ($status) {
 		$result = array_filter($result, fn($ticket) => $ticket['status'] === $status);
 	}

@@ -5,7 +5,7 @@
         "details": "Customer did not receive the item on time.",
         "status": "open",
         "escalated": true,
-        "created_at": "2024-12-10T14:30:00Z",
+        "created_at": "2025-05-10T14:30:00Z",
         "updated_at": "2025-05-12T21:59:48+00:00"
     },
     {
@@ -14,7 +14,7 @@
         "details": "Sent red shoes instead of black.",
         "status": "resolved",
         "escalated": true,
-        "created_at": "2024-12-08T09:00:00Z",
+        "created_at": "2025-05-08T09:00:00Z",
         "updated_at": "2025-05-12T21:52:01+00:00"
     },
     {
@@ -23,7 +23,7 @@
         "details": "The item arrived damaged.",
         "status": "open",
         "escalated": false,
-        "created_at": "2024-12-09T11:15:00Z",
+        "created_at": "2025-05-09T11:15:00Z",
         "updated_at": "2025-05-12T21:59:48+00:00"
     },
     {
@@ -32,7 +32,7 @@
         "details": "Customer requested a refund for the item.",
         "status": "open",
         "escalated": false,
-        "created_at": "2024-12-07T16:45:00Z",
+        "created_at": "2025-05-07T16:45:00Z",
         "updated_at": "2025-05-12T21:52:01+00:00"
     }
 ]

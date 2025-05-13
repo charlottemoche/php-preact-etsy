@@ -1,7 +1,7 @@
 import { useState } from 'preact/hooks';
 import { NoteModal } from '../../components/NoteModal.js';
 import type { TicketType, TicketActionType, TicketActionHandler } from '../../types/ticket.js';
-import Button from '../CoreComponents.js';
+import { Button } from '../CoreComponents.js';
 
 type TicketActionsProps = {
 	ticket: TicketType;
