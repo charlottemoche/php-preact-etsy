@@ -46,5 +46,11 @@
         "ticket_id": 1235,
         "text": "Will do, we'll send out black shoes.",
         "created_at": "2025-05-13T14:38:54+00:00"
+    },
+    {
+        "id": 9,
+        "ticket_id": 1236,
+        "text": "Oops, we will fix!",
+        "created_at": "2025-05-13T14:44:06+00:00"
     }
 ]
