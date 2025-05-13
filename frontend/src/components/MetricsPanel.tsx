@@ -28,11 +28,11 @@ export function MetricsPanel() {
 	];
 
 	return (
-		<div>
+		<div class="max-w-lg">
 			<h2 class="text-lg font-semibold text-gray-800 dark:text-gray-300 mb-4">Ticket Stats</h2>
-			<div class="bg-white dark:bg-dark-2 dark:border dark:border-black rounded shadow p-4 w-full space-y-3">
+			<div class="bg-white dark:bg-dark-2 border border-gray-100 dark:border-gray-600 rounded shadow p-4 w-full space-y-3">
 				{items.map(({ label, value, icon: Icon, color }) => (
-					<div class="flex items-center gap-3 dark:bg-dark p-2 rounded">
+					<div class="flex items-center gap-3 p-2 rounded">
 						<div class={`rounded-full p-2 ${color}`}>
 							<Icon class="w-4 h-4" />
 						</div>

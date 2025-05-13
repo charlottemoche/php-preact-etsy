@@ -12,26 +12,28 @@ export function Header() {
 				<div class="space-x-4 items-center text-white dark:text-gray-900 px-4 2xl:px-0">
 					<a
 						href="/"
-						class={`hover:border-b dark:border-gray-900 transition ${url === '/' ? 'active border-b dark:border-gray-900' : ''
+						class={`hover:border-b dark:border-gray-900 transition inline-flex items-center relative ${url === '/' ? 'active border-b dark:border-gray-900' : ''
 							}`}
 					>
 						Home
 					</a>
 					<a
 						href="/tickets"
-						class={`hover:border-b dark:border-gray-900 transition ${url === '/tickets' ? 'active border-b dark:border-gray-900' : ''
+						class={`hover:border-b dark:border-gray-900 transition inline-flex items-center relative ${url === '/tickets' ? 'active border-b dark:border-gray-900' : ''
 							}`}
 					>
 						Dashboard
 					</a>
 					<a
 						href="/help"
-						class={`hover:border-b dark:border-gray-900 transition ${url === '/help' ? 'active border-b dark:border-gray-900' : ''
+						class={`hover:border-b dark:border-gray-900 transition inline-flex items-center relative ${url === '/help' ? 'active border-b dark:border-gray-900' : ''
 							}`}
 					>
 						Help
 					</a>
-					<ThemeToggle />
+					<span class="inline-flex items-center relative top-1">
+						<ThemeToggle />
+					</span>
 				</div>
 			</nav>
 		</header>

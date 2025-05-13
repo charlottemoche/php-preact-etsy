@@ -101,7 +101,7 @@ export function TicketDashboard() {
 							{filter === 'all' ? 'No tickets.' : `No ${filter} tickets.`}
 						</p>
 					) : (
-						<ul class="grid md:grid-cols-2 gap-6 bg-white dark:bg-dark-2 dark:border dark:border-black p-6 rounded shadow dark:shadow-2xl">
+						<ul class="grid md:grid-cols-2 gap-6">
 							{filteredTickets.map((ticket) => (
 								<li key={ticket.id}>
 									<Ticket ticket={ticket} onAction={(type, note) => handleAction(ticket.id, type, note)} />
