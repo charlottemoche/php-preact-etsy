@@ -16,9 +16,9 @@ export function Ticket({ ticket, onAction }: TicketProps) {
 	});
 
 	return (
-		<li class="border dark:border-gray-600 rounded dark:bg-gray-900">
+		<li class="border dark:border-gray-600 rounded dark:bg-dark">
 			<div class="flex flex-col">
-				<a href={`/tickets/${id}`} class="block w-full hover:bg-gray-100 dark:hover:bg-gray-800 p-3">
+				<a href={`/tickets/${id}`} class="block w-full hover:bg-gray-100 dark:hover:bg-dark-2 p-3">
 					<span class="font-medium">{`Order #${id} – “${issue}”`}</span>
 
 					<div class="text-xs text-gray-500 dark:text-gray-300 mt-1">

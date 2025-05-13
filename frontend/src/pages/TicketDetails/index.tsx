@@ -66,7 +66,7 @@ export function TicketDetailsPage() {
 			<div class="mb-6">
 				<a href="/tickets" class="text-gray-800 dark:text-gray-300 hover:text-black dark:hover:text-gray-100 hover:underline">← Back to dashboard</a>
 			</div>
-			<div class="bg-white dark:bg-gray-900 p-4 rounded shadow max-w-2xl mx-auto">
+			<div class="bg-white dark:bg-dark-2 p-4 rounded shadow max-w-2xl mx-auto">
 				<TicketDetails ticket={ticket} notes={notes} onAction={handleAction} />
 			</div>
 		</main>

@@ -4,14 +4,12 @@ module.exports = {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  safelist: [
-    'dark:text-gray-200',
-    'dark:text-white',
-  ],
   theme: {
     extend: {
       colors: {
-        brand: '#EB6D20'
+        brand: '#EB6D20',
+        dark: '#22252A',
+        'dark-2': '#1C1E22',
       }
     },
   },

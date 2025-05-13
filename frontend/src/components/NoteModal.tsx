@@ -12,7 +12,7 @@ export function NoteModal({
 
 	return (
 		<div class="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
-			<div class="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-4 w-full max-w-md">
+			<div class="bg-white dark:bg-dark rounded-lg shadow-lg p-4 w-full max-w-md">
 				<h3 class="text-lg font-semibold mb-2">Add a Note</h3>
 				<textarea
 					class="w-full border border-gray-300 rounded p-2 text-sm"

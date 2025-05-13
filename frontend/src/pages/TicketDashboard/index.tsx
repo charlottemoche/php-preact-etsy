@@ -60,7 +60,7 @@ export function TicketDashboard() {
 								window.history.pushState({}, '', `/tickets?${params.toString()}`);
 								setQueryKey((prev) => prev + 1);
 							}}
-							class="border border-gray-300 rounded px-2 py-1 text-sm w-full dark:bg-gray-800"
+							class="border border-gray-300 rounded px-2 py-1 text-sm w-full dark:bg-dark-2"
 						>
 							<option value="all">All</option>
 							<option value="open">Open</option>
@@ -77,7 +77,7 @@ export function TicketDashboard() {
 								window.history.pushState({}, '', `/tickets?${params.toString()}`);
 								setQueryKey((prev) => prev + 1);
 							}}
-							class="border border-gray-300 rounded px-2 py-1 text-sm w-full dark:bg-gray-800"
+							class="border border-gray-300 rounded px-2 py-1 text-sm w-full dark:bg-dark-2"
 						>
 							<option value="newest">Newest First</option>
 							<option value="oldest">Oldest First</option>
@@ -101,7 +101,7 @@ export function TicketDashboard() {
 							{filter === 'all' ? 'No tickets.' : `No ${filter} tickets.`}
 						</p>
 					) : (
-						<ul class="grid md:grid-cols-2 gap-6 bg-white dark:bg-gray-800 dark:border dark:border-black p-4 rounded shadow dark:shadow-2xl">
+						<ul class="grid md:grid-cols-2 gap-6 bg-white dark:bg-dark-2 dark:border dark:border-black p-4 rounded shadow dark:shadow-2xl">
 							{filteredTickets.map((ticket) => (
 								<li key={ticket.id}>
 									<Ticket ticket={ticket} onAction={(type, note) => handleAction(ticket.id, type, note)} />
