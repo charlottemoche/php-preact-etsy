@@ -40,7 +40,7 @@ export function TicketDetailsPage() {
 				)}
 
 				<div class="border-t mt-4">
-					<TicketActions ticket={ticket} onAction={handleAction} />
+					<TicketActions ticket={ticket} onAction={(type, note) => handleAction(ticket.id, type, note)} />
 				</div>
 			</div>
 

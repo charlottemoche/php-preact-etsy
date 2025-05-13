@@ -34,5 +34,17 @@
         "ticket_id": 1236,
         "text": "Ahh",
         "created_at": "2025-05-13T14:06:59+00:00"
+    },
+    {
+        "id": 7,
+        "ticket_id": 1234,
+        "text": "Thank you!",
+        "created_at": "2025-05-13T14:30:33+00:00"
+    },
+    {
+        "id": 8,
+        "ticket_id": 1235,
+        "text": "Will do, we'll send out black shoes.",
+        "created_at": "2025-05-13T14:38:54+00:00"
     }
 ]
