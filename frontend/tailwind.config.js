@@ -11,6 +11,7 @@ module.exports = {
         brand: '#EB6D20',
         dark: '#22252A',
         'dark-2': '#1C1E22',
+        'dark-3': '#30343A'
       }
     },
   },
